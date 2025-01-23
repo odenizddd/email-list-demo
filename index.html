@@ -52,6 +52,7 @@
         <input type="text" placeholder="Last Name"/>
         <input type="email" placeholder="Email"/>
         <button>Register</button>
+        <p></p>
     </div>
     <script>
         const firstName = document.querySelector('input[placeholder="First Name"]');
@@ -59,6 +60,8 @@
         const email = document.querySelector('input[placeholder="Email"]');
 
         const button = document.querySelector('button');
+
+        const p = document.querySelector('p');
 
         button.onclick = () => {
             body = {
@@ -73,9 +76,10 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(body)
-            }).then(response => response.json())
+            })
             .then(data => {
                 console.log(data);
+                p.textContent = "Successfully registered. Please check your emails.";
             }).catch(error => {
                 console.error(error);
             });
