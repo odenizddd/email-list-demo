@@ -1,10 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Home</title>
+    <title>Bucode</title>
+    <style>
+        * {
+            font-family: sans-serif;
+        }
+
+        div {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            gap: 1rem;
+        }
+
+        input {
+            padding: 8px;
+            border: solid 1px #999;
+            border-radius: 4px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            border: solid 1px black;
+        }
+
+        input::placeholder {
+            color: #666;
+        }
+
+        button {
+            font-size: 16px;
+            padding: 8px;
+            background-color: transparent;
+            border: 1px solid black;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: color 0.5s ease;
+        }
+
+        button:hover {
+            background-color: #eee;
+        }
+    </style>
 </head>
 <body>
-    <h1>Home</h1>
-    <p>Welcome to the home page.</p>
+    <h1>Register to BuCode.</h1>
+    <div>
+        <input type="text" placeholder="First Name"/>
+        <input type="text" placeholder="Last Name"/>
+        <input type="email" placeholder="Email"/>
+        <button>Register</button>
+    </div>
+    <script>
+        const firstName = document.querySelector('input[placeholder="First Name"]');
+        const lastName = document.querySelector('input[placeholder="Last Name"]');
+        const email = document.querySelector('input[placeholder="Email"]');
+
+        const button = document.querySelector('button');
+
+        button.onclick = () => {
+            body = {
+                name: firstName.value,
+                surname: lastName.value,
+                email: email.value
+            }
+
+            fetch('https://famous-boba-d42949.netlify.app/.netlify/functions/hello', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            }).then(response => response.json())
+            .then(data => {
+                console.log(data);
+            }).catch(error => {
+                console.error(error);
+            });
+        }
+    </script>
 </body>
 </html>
